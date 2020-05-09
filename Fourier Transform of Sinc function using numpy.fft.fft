@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat May  9 06:24:49 2020
+
+@author: ritambasu
+"""
+import numpy as np
+from matplotlib import pyplot as plt
+
+def f(x):
+    if x==0:
+        return (1.0)
+    else :
+        return (np.sin(x)/x)
+
+ 
+#fourier transform through dft by using numpy.fft by using the progamming meterial taught in the class 
+xmin=-5
+xmax=5
+numpoints=100
+dx=(xmax-xmin)/(numpoints-1)
+sampled_data=np.zeros(numpoints)
+xarr=np.zeros(numpoints)
+for i in range (numpoints):
+    sampled_data[i]=f(xmin+i*dx)
+    xarr[i]=xmin+i*dx
+dft=np.fft.fft(sampled_data,norm='ortho')
+k=2*np.pi*np.fft.fftfreq(numpoints,d=dx)
+factor=np.exp(-1j*k*xmin)
+ft=dx*np.sqrt(numpoints/(2.0*np.pi))*factor*dft
+
+
+#defining_actual _fourier transform calculated using Mathematica
+def fk_exact(k):
+    s1=np.sign(1-k)
+    s2=np.sign(1+k)
+    fact=np.sqrt(np.pi/8.0)
+    return(fact*(s1+s2))
+
+#plottings
+plt.plot(k,fk_exact(k),label="actual solution")
+plt.plot(k,ft,label="numerical solution",ls='--')
+plt.xlabel('k',fontsize=15)
+plt.ylabel('ƒ˜(k)',fontsize=15)
+plt.title('Fourier transform of sin(x)/x graph numericalvs exact',fontsize=15)
+plt.legend()
+plt.show()
+t=np.arange(-30,30,0.01)
+g=[]
+for i in range(len(t)):
+    g.append(f(t[i]))
+ft=np.array(g)
+plt.plot(t,g,label="actual fn in real space")
+plt.legend()
+plt.xlabel('x',fontsize=15)
+plt.ylabel('f(x)',fontsize=15)
+plt.title('x vs sin(x)/x graph',fontsize=15)
+plt.show()
+ 
