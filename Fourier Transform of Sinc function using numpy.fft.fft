@@ -5,6 +5,7 @@ Created on Sat May  9 06:24:49 2020
 
 @author: ritambasu
 """
+#Problem1
 import numpy as np
 from matplotlib import pyplot as plt
 
