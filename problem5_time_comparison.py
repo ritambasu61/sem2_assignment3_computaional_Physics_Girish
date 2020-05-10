@@ -41,7 +41,7 @@ plt.plot(k,my_time_arr,label="Tme taken by my code")
 plt.plot(k,numpy_time_arr,label="Tme taken by numpy.fft.fft")
 plt.xlabel('n',fontsize=15)
 plt.ylabel('time',fontsize=15)
-plt.title('Time comparison between ',fontsize=20)
+plt.title('Time comparison',fontsize=20)
 plt.legend()
 plt.show()
 
