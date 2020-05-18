@@ -39,8 +39,8 @@ FT=np.abs(dx*dy*(numpoints/(2.0*np.pi))*factor*dft)
 Fk_Exact=fk_exact(KX,KY)
 
 #plottings in 3d
-ax.plot_wireframe(KX,KY ,FT, color='Red',label="numerical solution")
-ax.plot_wireframe(KX,KY,Fk_Exact, color='Green',label="actual solution")
+ax.plot_wireframe(KX,KY ,FT, color='Red',label="Numerical solution")
+ax.plot_wireframe(KX,KY,Fk_Exact, color='Green',label="Analytical solution")
 ax.set_xlabel('kx',fontsize=15)
 ax.set_ylabel('ky',fontsize=15)
 ax.set_zlabel('ƒ',fontsize=15)
