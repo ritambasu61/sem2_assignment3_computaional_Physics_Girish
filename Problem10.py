@@ -18,40 +18,32 @@ url = 'http://theory.tifr.res.in/~kulkarni/noise.txt'
 sampled_data=np.loadtxt(url)
  
 #fourier transform through dft by using numpy.fft.fft 
+xmin=0
 dx=1
 numpoints=len(sampled_data)
-dft=np.fft.fft(sampled_data,n=2*numpoints,norm='ortho')
-k=2*np.pi*np.fft.fftfreq(2*numpoints,d=dx)
+dft=np.fft.fft(sampled_data,n=numpoints,norm='ortho')
+k=2*np.pi*np.fft.fftfreq(numpoints,d=dx)
 
 
 """Now the following process for convoluting R i.e
-corelation fuction by convolution sampled data function with itself"""
+correlation fuction by convolution sampled data function with itself using
+numpy.Though the same code can be use for conlvolution as spcified in problem 9"""
 
 
 
-#defining frequency array kq
-kq=np.fft.fftfreq(2*numpoints,d=dx)
+#defining frequency array kq to plot dft w.r.t it
+kq=np.fft.fftfreq(numpoints,d=dx)
 
 #defining fourier transformed variable say(k) corresponding to data points say(x)
 k=2*np.pi*kq
-
-#defining x array which is in the inverse fourier space of k array
-dk=k[3]-k[2]
-x=2*np.pi*np.fft.fftfreq(2*numpoints,d=dk)
-
-#multiplying two dft's with approaite factors
-xmin=0
 factor1=np.exp(-1j*k*xmin)
-g_ddft=(factor1*dft)
-h_ddft=(factor1*dft)
 
-"""multiplying two dft's and taking the inverse fourier transform using numpy.fft.ifft
- to compute the convolution """
-mult_dft=(g_ddft*h_ddft)
 #Defining corelation function using Periodogram estimator
-R=(dx*np.sqrt(2*numpoints)*np.fft.ifft(mult_dft,norm='ortho')/numpoints) 
-#defining power spectrum to be forier transform of the correlation function
-Power=np.abs(dx*np.sqrt(numpoints/(2.0*np.pi))*factor1*np.fft.fft(R,norm='ortho'))/numpoints
+R=np.convolve(sampled_data,sampled_data,'same')/numpoints
+
+#Defining power spectrum to be forier transform of the correlation function
+Power=np.abs(dx*np.sqrt(numpoints/(2.0*np.pi))*factor1*np.fft.fft(R,norm='ortho'))
+
 
 
 
@@ -60,8 +52,6 @@ plt.plot(sampled_data)
 plt.xlabel('n',fontsize=16)
 plt.ylabel('sampled function value',fontsize=16)
 plt.show()
-
-
 
 #plotting of dft of sampled data
 plt.plot(kq,dft)
@@ -77,19 +67,31 @@ plt.xlabel(r'$k$',fontsize=16)
 plt.ylabel(r'Power spectrum',fontsize=16)
 plt.show()
 
+#plotting the power spectrum bins
+bins=10
+plt.hist(Power,bins) 
+plt.title('Actual Binned power spectrum ',fontsize=15)
+plt.xlabel(r'Power spectrum',fontsize=16)
+plt.ylabel(r'Occurance',fontsize=16)
+plt.show()
+
+"""Now for comparison I have also plotted the graph for the formula 
+P=(Abs(F.T(k))^2)/N (N factor comes because of the periodogram and the results shows that it doesnot match with the 
+previous plotted result as the process is STOCASTIC."""
 
 #plotting of power spectrum if the process is non-stocastic
 f_k=dx*np.sqrt(numpoints/(2.0*np.pi))*factor1*dft
-p=(np.conj(f_k)*f_k)/numpoints #power spectrum using Periodogram estimator
+p=np.abs(f_k)**2/numpoints #power spectrum using Periodogram estimator
 plt.plot(k,p)
 plt.title('for Non Stocastic process Power Spectrum ',fontsize=15)
 plt.ylabel('non_stocastic power spectrum',fontsize=16)
 plt.xlabel('n',fontsize=16)
 plt.show()
 
-#plotting the power spectrum bins
+#plotting the power spectrum bins if the process were non stocastic
 bins=10
-plt.hist(Power,bins) 
+plt.hist(p,bins) 
+plt.title('Binned power spectrum if the process was non-stocastic',fontsize=15)
 plt.xlabel(r'Power spectrum',fontsize=16)
 plt.ylabel(r'Occurance',fontsize=16)
 plt.show()
