@@ -7,7 +7,6 @@ Created on Wed May 13 07:25:25 2020
 """
 import numpy as np
 from matplotlib import pyplot as plt
-#Problem1
 
 def g(x):
     if abs(x)<1.0 and x>-1.0:
