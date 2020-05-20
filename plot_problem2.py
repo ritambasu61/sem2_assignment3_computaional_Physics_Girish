@@ -15,7 +15,7 @@ def exact_ft(k):
         return(np.sqrt(np.pi/2.0))
     else:
         return(0.0)
-#coverting txt file to array
+# store txt file data to make list
 data=open('Q2.txt','r')
 karr=[]
 aft=[]
