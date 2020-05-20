@@ -30,7 +30,7 @@ for line in data:
 plt.plot(karr,aft,'r',label='numerical result')    
 plt.plot(karr,aft_exact,'black',label='analytical result')
 plt.xlabel('k',fontsize=16)
-plt.ylabel('f`',fontsize=16)
+plt.ylabel(r'$\tilde{f}$',fontsize=16)
 plt.title('Comparison of results ',fontsize=15)
 plt.legend()
 plt.show()
