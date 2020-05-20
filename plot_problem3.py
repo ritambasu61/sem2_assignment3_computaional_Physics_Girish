@@ -15,12 +15,12 @@ def exact_ft(k):
     else:
         return(0.0)
 
-file=open('Q3.txt','r')
+data=open('Q3.txt','r')
 karr=[]
 aft=[]
 aft_exact=[]
 
-for line in file:
+for line in data:
     k,aft_data=line.split()
     karr.append(float(k))
     aft.append(float(aft_data))
