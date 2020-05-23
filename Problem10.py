@@ -39,7 +39,7 @@ k=2*np.pi*kq
 factor1=np.exp(-1j*k*xmin)
 
 #Defining corelation function using Periodogram estimator
-R=np.convolve(sampled_data,sampled_data,'same')/numpoints
+R=np.convolve(sampled_data,sampled_data,'same')/numpoints #because here dx=1.So,multiply with dx gives me same answer
 
 #Defining power spectrum to be forier transform of the correlation function
 Power=np.abs(dx*np.sqrt(numpoints/(2.0*np.pi))*factor1*np.fft.fft(R,norm='ortho'))
