@@ -17,9 +17,9 @@ def f(x):
 
  
 #fourier transform through dft by using numpy.fft by using the progamming meterial taught in the class 
-xmin=-5
-xmax=5
-numpoints=100
+xmin=-50
+xmax=50
+numpoints=1024
 dx=(xmax-xmin)/(numpoints-1)
 sampled_data=np.zeros(numpoints)
 xarr=np.zeros(numpoints)
@@ -47,7 +47,7 @@ plt.ylabel('ƒ˜(k)',fontsize=15)
 plt.title('Fourier transform of sin(x)/x graph Numerical vs Exact',fontsize=15)
 plt.legend()
 plt.show()
-t=np.arange(-30,30,0.01)
+t=np.arange(-50,50,0.01)
 g=[]
 for i in range(len(t)):
     g.append(f(t[i]))
