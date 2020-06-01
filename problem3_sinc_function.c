@@ -2,8 +2,8 @@
 #include <math.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_fft_complex.h>
-#define real(z,i) ((z)[2*(i)])
-#define imaginary(z,i) ((z)[2*(i)+1])
+#define REAL(z,i) ((z)[2*(i)])
+#define IMAG(z,i) ((z)[2*(i)+1])
 
 int n=1024;
 
@@ -25,12 +25,12 @@ int main (void)
 
 	for (int i=0;i<n;i++)
 	{
-		real(data,i)=f(xmin+i*dx); imaginary(data,i)= 0.0;
+		REAL(data,i)=f(xmin+i*dx); IMAG(data,i)= 0.0;
 	}
 
 	gsl_fft_complex_radix2_forward (data, 1, n); 
 
-        //command for save the data in a txt file
+
 	FILE *fptr;
 	fptr=fopen("Q3.txt","w");
 	
@@ -46,9 +46,9 @@ int main (void)
 			k[i]=2*M_PI*((i-n)/(n*dx));
 		}
 
-		real(data,i)=dx*(1/sqrt(2.0*M_PI))*(cos(k[i]*xmin)*real(data,i)+sin(k[i]*xmin)*imaginary(data,i));
+		REAL(data,i)=dx*(1/sqrt(2.0*M_PI))*(cos(k[i]*xmin)*REAL(data,i)+sin(k[i]*xmin)*IMAG(data,i));
 		
-		fprintf(fptr,"%f    %f\n",k[i],real(data,i));		
+		fprintf(fptr,"%f    %f\n",k[i],REAL(data,i));		
 	}
 	
 	fclose(fptr);	
@@ -58,3 +58,4 @@ int main (void)
 
 // gcc -Wall Q3.c -lm -lgsl -lgslcblas -o Q3
 // ./Q3
+
