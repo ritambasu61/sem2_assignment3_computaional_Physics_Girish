@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat May  9 09:34:00 2020
-
 @author: ritambasu
 """
 import numpy as np
@@ -43,7 +42,7 @@ ax.plot_wireframe(KX,KY ,FT, color='Red',label="Numerical solution")
 ax.plot_wireframe(KX,KY,Fk_Exact, color='Green',label="Analytical solution")
 ax.set_xlabel('kx',fontsize=15)
 ax.set_ylabel('ky',fontsize=15)
-ax.set_zlabel('ƒ',fontsize=15)
+ax.set_zlabel(r'$\tilde{f}$',fontsize=15)
 plt.title('kx,ky vs f`(kx,ky) graph',fontsize=15)
 plt.legend()
 plt.show()
