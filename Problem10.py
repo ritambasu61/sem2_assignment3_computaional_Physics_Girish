@@ -75,9 +75,6 @@ plt.xlabel(r'Power spectrum',fontsize=16)
 plt.ylabel(r'Occurance',fontsize=16)
 plt.show()
 
-"""Now for comparison I have also plotted the graph for the formula 
-P=Abs(F.T(k))^2/N  and the results shows that it doesnot match with the 
-previous plotted result as the process is STOCASTIC."""
 
 #plotting of power spectrum through ft
 f_k=dx*np.sqrt(numpoints/(2.0*np.pi))*factor1*dft
