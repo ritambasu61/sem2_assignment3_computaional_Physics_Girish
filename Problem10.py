@@ -8,7 +8,7 @@ Created on Thu May 14 16:07:27 2020
 
 
 import numpy as np
-import pandas as pd # Import pandas
+#import pandas as pd # Import pandas
 from matplotlib import pyplot as plt
 from urllib.request import urlretrieve # Import package
 
@@ -30,7 +30,7 @@ correlation fuction by convolution sampled data function with itself using
 numpy.Though the same code can be use for conlvolution as spcified in problem 9"""
 
 
-
+#power spectrum through convolution of R = colrelation function
 #defining frequency array kq to plot dft w.r.t it
 kq=np.fft.fftfreq(numpoints,d=dx)
 
@@ -39,7 +39,7 @@ k=2*np.pi*kq
 factor1=np.exp(-1j*k*xmin)
 
 #Defining corelation function using Periodogram estimator
-R=np.convolve(sampled_data,sampled_data,'same')/numpoints #because here dx=1.So,multiply with dx gives me same answer
+R=np.convolve(sampled_data,sampled_data,'same')/(2*numpoints) 
 
 #Defining power spectrum to be forier transform of the correlation function
 Power=np.abs(dx*np.sqrt(numpoints/(2.0*np.pi))*factor1*np.fft.fft(R,norm='ortho'))
@@ -76,14 +76,14 @@ plt.ylabel(r'Occurance',fontsize=16)
 plt.show()
 
 """Now for comparison I have also plotted the graph for the formula 
-P=(Abs(F.T(k))^2)/N (N factor comes because of the periodogram and the results shows that it doesnot match with the 
+P=Abs(F.T(k))^2/N  and the results shows that it doesnot match with the 
 previous plotted result as the process is STOCASTIC."""
 
-#plotting of power spectrum if the process is non-stocastic
+#plotting of power spectrum through ft
 f_k=dx*np.sqrt(numpoints/(2.0*np.pi))*factor1*dft
 p=np.abs(f_k)**2/numpoints #power spectrum using Periodogram estimator
 plt.plot(k,p)
-plt.title('for Non Stocastic process Power Spectrum ',fontsize=15)
+plt.title('Power Spectrum through FT ',fontsize=15)
 plt.ylabel('non_stocastic power spectrum',fontsize=16)
 plt.xlabel('n',fontsize=16)
 plt.show()
@@ -91,7 +91,7 @@ plt.show()
 #plotting the power spectrum bins if the process were non stocastic
 bins=10
 plt.hist(p,bins) 
-plt.title('Binned power spectrum if the process was non-stocastic',fontsize=15)
+plt.title('Binned power spectrum Power Spectrum through FT',fontsize=15)
 plt.xlabel(r'Power spectrum',fontsize=16)
 plt.ylabel(r'Occurance',fontsize=16)
 plt.show()
